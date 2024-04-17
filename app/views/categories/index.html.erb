@@ -1,0 +1,17 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-5">Select a Category</h1>
+  <div class="row">
+    <% @categories.each do |category| %>
+      <div class="col-md-4 mb-3">
+        <div class="category-card">
+          <!-- Link each category card to the category's products page -->
+          <%= link_to category_path(category), class: 'category-link' do %>
+            <div class="category-content">
+              <h3 class="category-title"><%= category.name %></h3>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

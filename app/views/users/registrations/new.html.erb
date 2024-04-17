@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <!-- Flash messages display -->
+      <% flash.each do |name, msg| %>
+        <% if msg.is_a?(String) %>
+          <div class="alert alert-<%= name == 'notice' ? 'success' : 'danger' %> alert-dismissible fade show" role="alert">
+            <%= msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% end %>
+      <% end %>
+
+      <div class="text-center mb-4">
+        <h2>Sign up for an Account</h2>
+        <p class="text-muted">Start managing your projects efficiently.</p>
+      </div>
+      <div class="card shadow-md">
+        <div class="card-body p-4">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation", novalidate: "" }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+        
+          <div class="form-floating mb-3">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', id: 'floatingEmail', placeholder: "name@example.com", required: true %>
+            <%= f.label :email, 'Email address', class: 'form-label' %>
+          </div>
+        
+          <div class="form-floating mb-3">
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', id: 'floatingPassword', placeholder: "Password", required: true %>
+            <% if @minimum_password_length %>
+              <small class="form-text text-muted">
+                (<%= @minimum_password_length %> characters minimum)
+              </small>
+            <% end %>
+            <%= f.label :password, 'Password', class: 'form-label' %>
+          </div>
+        
+          <div class="form-floating mb-3">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', id: 'floatingPasswordConfirmation', placeholder: "Confirm Password", required: true %>
+            <%= f.label :password_confirmation, 'Confirm Password', class: 'form-label' %>
+          </div>
+        
+          <!-- Full Address Field -->
+          <div class="form-floating mb-3">
+            <%= f.text_field :full_address, class: 'form-control', id: 'floatingFullAddress', placeholder: "Full Address", required: true %>
+            <%= f.label :full_address, 'Full Address', class: 'form-label' %>
+          </div>
+        
+          <!-- Province Dropdown -->
+          <div class="form-group mb-3">
+            <%= f.label :province_id, 'Province', class: 'form-label' %>
+            <%= f.collection_select :province_id, @provinces, :id, :name, { include_blank: 'Please Select' }, { class: 'form-select', required: true } %>
+          </div>
+        
+          <div class="d-grid gap-2">
+            <%= f.submit "Sign up", class: "btn btn-lg btn-primary" %>
+          </div>
+        <% end %>
+        
+        </div>
+      </div>
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>

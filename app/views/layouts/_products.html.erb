@@ -1,0 +1,19 @@
+<div class="col-md-3 mb-4">
+<div class="product-card">
+  <div class="product-card-img">
+    <% if product.image.attached? %>
+      <%= image_tag(product.image, class: 'img-fluid') %>
+    <% else %>
+      <img src="https://via.placeholder.com/350x350" class="img-fluid" alt="Product Image">
+    <% end %>
+  </div>
+  <div class="product-card-body">
+    <h5 class="product-title"><%= product.name %></h5>
+    <p class="product-description"><%= product.description %></p>
+    <div class="product-price">Price: <%= number_to_currency(product.price) %></div>
+  </div>
+  <div class="product-card-footer text-center">
+    <%= link_to 'Learn More', product_path(product), class: 'btn btn-outline-primary' %>
+  </div>
+</div>
+</div>

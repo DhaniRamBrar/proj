@@ -1,0 +1,35 @@
+<%= render 'layouts/client_Nav' %>
+<div class="container mt-5">
+  <h1 class="mb-4">Recent Orders</h1>
+
+  <% if @orders.empty? %>
+    <div class="alert alert-info">You have no recent orders.</div>
+  <% else %>
+    <% @orders.each do |order| %>
+      <div class="card mb-3">
+        <div class="card-header">
+          Order ID: <%= order.id %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Order Date: <%= order.created_at.strftime("%B %d, %Y") %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Total: <%= number_to_currency(order.grand_total) %></h6>
+          <div>
+            <strong>Address:</strong> <%= order.address %><br>
+            <strong>Province:</strong> <%= order.province.name %><br>
+            <strong>Subtotal:</strong> <%= number_to_currency(order.subtotal) %><br>
+            <strong>GST:</strong> <%= number_to_currency(order.gst) %><br>
+            <strong>PST:</strong> <%= number_to_currency(order.pst) %><br>
+            <strong>HST:</strong> <%= number_to_currency(order.hst) %><br>
+            <strong>Total:</strong> <%= number_to_currency(order.grand_total) %><br>
+            <strong>Products:</strong>
+            <ul>
+              <% order.order_items.each do |item| %>
+                <li><%= item.product.name %> - <%= item.quantity %> x <%= number_to_currency(item.product.price) %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

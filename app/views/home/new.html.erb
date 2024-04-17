@@ -1,0 +1,16 @@
+<%= render 'layouts/client_Nav' %>
+<div class="container py-5">
+<h2>New Products</h2>
+
+<% if @new_products.any? %>
+  <div class="products">
+
+  <div class="row">
+  <%= render partial: 'layouts/products', collection: @new_products, as: :product %>
+  </div>
+  </div>
+<% else %>
+  <p>No new products found.</p>
+<% end %>
+
+</div>

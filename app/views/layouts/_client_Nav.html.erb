@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <%= link_to root_path, class: 'navbar-brand' do %>
+  <%= image_tag('logo.png', alt: 'Logo', class:"logo") %>
+  <% end %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <%= link_to "About", static_page_path(slug: 'About'), class: "nav-link" %> <!-- Updated About link -->
+        </li>
+        <li class="nav-item">
+          <%= link_to "Contact", static_page_path(slug: 'Contact'), class: "nav-link" %> <!-- Updated Contact link -->
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+          <%= link_to 'Recent Orders', index_orders_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'View Cart', cart_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Settings', profile_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-primary nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Login', new_user_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

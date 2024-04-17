@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ECommerse Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    .product-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-img img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.product-card-body {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  flex-grow: 1;
+}
+
+.product-price {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.product-card-footer {
+  padding: 10px 15px;
+  background: #f9f9f9;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background: #007bff;
+  color: #fff;
+}
+.product-detail-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-image img {
+  max-height: 400px;
+  width: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.product-content {
+  text-align: center;
+}
+
+.product-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.product-category, .product-ingredients, .product-price {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.btn-outline-secondary {
+  font-weight: bold;
+  border-width: 2px;
+}
+
+.category-card {
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.category-link {
+  display: block;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.category-link:hover {
+  background-color: #e7e7e7;
+}
+
+.category-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+  padding: 12px 15px;
+}
+
+.table tbody td {
+  padding: 12px 15px;
+  color: #495057;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+.table-hover tbody tr:hover {
+  background-color: #f5f5f7;
+}
+
+.table-bordered th, .table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.table th {
+  width: 20%;
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.table td {
+  background-color: #ffffff;
+}
+
+.card-body {
+  overflow-x: auto; /* Ensures the table is responsive on smaller screens */
+}
+
+
+    </style>
+  </head>
+  <body>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+
+   
+    <%= yield %>
+  </body>
+</html>

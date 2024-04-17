@@ -1,0 +1,31 @@
+<%= render 'layouts/client_Nav' %>
+<div class="container mt-5">
+
+  <h2>Update Data</h2>
+
+  <div class="card">
+  <%= form_for @user do |f| %>
+    <div class="card-body">
+      <p><strong>Email:</strong> <%= @user.email %></p>
+     
+    <div class="form-group mb-3">
+    <%= f.label :full_address %>
+    <%= f.text_field :full_address, class: 'form-control' %>
+  </div>
+      <div class="form-group mb-4">
+      <%= f.label :province_id, 'Province' %>
+      <%= f.collection_select :province_id, Province.all, :id, :name, {prompt: "Select a Province"}, {class: 'form-select'} %>
+    </div>
+    <% flash.each do |type, message| %>
+        <div class="alert alert-dismissible fade show" role="alert">
+          <%= message %>
+          
+        </div>
+      <% end %>
+    <div class="actions">
+      <%= f.submit "Update Profile", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+    </div>
+  </div>
+</div>

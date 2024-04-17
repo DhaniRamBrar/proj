@@ -1,0 +1,24 @@
+<div class="container py-5">
+  <h1 class="text-center mb-4"><%= @category.name %> Products</h1>
+  <div class="row g-4">
+    <% @products.each do |product| %>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <% if product.image.attached? %>
+            <%= image_tag(product.image, class: 'card-img-top') %>
+          <% else %>
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Placeholder Image">
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.description %></p>
+            <p class="card-text"><strong>Price:</strong> <%= number_to_currency(product.price) %></p>
+          </div>
+          <div class="card-footer">
+            <%= link_to 'View Product', product_path(product), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

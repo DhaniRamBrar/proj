@@ -1,0 +1,31 @@
+<%= render 'layouts/client_Nav' %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- Product Detail Card -->
+      <div class="product-detail-card">
+        <!-- Product Image -->
+        <% if @product.image.attached? %>
+          <div class="product-image">
+            <%= image_tag(@product.image, class: 'img-fluid') %>
+          </div>
+        <% end %>
+        <!-- Product Content -->
+        <div class="product-content">
+          <h1 class="product-title"><%= @product.name %></h1>
+          <p class="product-description"><%= @product.description %></p>
+          <p class="product-category"><%= @product.category.name if @product.category.present? %></p>
+          <p class="product-price"><%= number_to_currency(@product.price) %></p>
+          <%= form_with url: add_cart_path, method: :post, local: true, class: "form-inline" do |form| %>
+        
+              <%= form.label :quantity, "Quantity:", class: "mr-2" %>
+              <%= form.number_field :quantity, value: 1, min: 1, class: 'form-control', style: 'width: 100px;' %>
+          
+            <%= form.hidden_field :product_id, value: @product.id %>
+            <%= form.submit "Add to Cart", class: "btn btn-outline-secondary ml-2" %>
+          <% end %>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

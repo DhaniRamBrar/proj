@@ -1,0 +1,40 @@
+<%= render 'layouts/client_Nav' %>
+<div class="hero-header mb-5" style="background-image: url('https://images.unsplash.com/photo-1618774770952-d9d2ba2286d0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-position: center; background-size: cover; color: white; padding-top: 100px; padding-bottom: 100px;">
+<div class="container py-5 text-center text-white">
+  <h1 class="display-3 fw-bold">Discover Our Eco-Friendly Products</h1>
+  <p class="lead">Join us in making a sustainable choice for the planet.</p>
+  <div class="hero-buttons">
+    <a href="#products" class="btn btn-lg btn-outline-light me-2">Explore Now</a>
+    <%= link_to 'By Category', categories_path, class: 'btn btn-lg btn-light' %>
+    <%= link_to 'Sale', home_sale_path, class: 'btn btn-lg btn-light' %>
+    <%= link_to 'New', home_new_path, class: 'btn btn-lg btn-light' %>
+  </div>
+</div>
+</div>
+<div class="container py-5">
+
+<div class="container py-5">
+  <%= form_with url: root_path, method: :get, local: true do |form| %>
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <%= form.label :keyword, "Search by keyword" %>
+        <%= form.text_field :keyword, value: params[:keyword], class: 'form-control' %>
+      </div>
+      <div class="col-md-4">
+        <%= form.label :category_id, "Filter by category" %>
+        <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "All Categories", selected: params[:category_id], class: 'form-select' %>
+      </div>
+      <div class="col-md-4 align-self-end">
+        <%= form.submit "Search", class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+  <div class="row g-4">
+  <%= render partial: 'layouts/products', collection: @products, as: :product %>
+  </div>
+  <div class="pagination mt-4">
+    <%= paginate @products %>
+  </div>
+</div>

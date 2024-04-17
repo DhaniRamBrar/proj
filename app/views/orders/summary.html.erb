@@ -1,0 +1,101 @@
+<%= render 'layouts/client_Nav' %>
+<div class="container my-4">
+  <h1>Order Summary</h1>
+
+  <% if @items.present? %>
+    <%= form_with model: @order, url: orders_path, method: :post, id: "orderForm", local: true do |form| %>
+      <div class="mb-3">
+        <h4>User Details</h4>
+        <p>Email: <%= @user.email %></p>
+        <div class="form-group">
+          <%= form.label :address, "Address:" %>
+          <%= form.text_field :address, value: @user.full_address, class: "form-control", name: 'order[address]' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :province_id, "Province:" %>
+          <%= form.collection_select :province_id, @provinces, :id, :name, {selected: @user.province_id}, {class: "form-control", name: 'order[province_id]', id:'userProvince'} %>
+        </div>
+      </div>
+
+      <% @items.each do |item| %>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <%= image_tag(item[:product].image, class: 'img-fluid rounded-start') if item[:product].image.present? %>
+          </div>
+          <div class="col-md-8">
+            <h5><%= item[:product].name %></h5>
+            <p>Unit Price: <%= number_to_currency(item[:product].price) %></p>
+            <p>Quantity: <%= item[:quantity] %></p>
+            <p>Price: <%= number_to_currency(item[:product].price * item[:quantity]) %></p>
+            <%= form.hidden_field :product_ids, multiple: true, value: item[:product].id, name: 'product_ids[]' %>
+            <%= form.hidden_field :quantities, multiple: true, value: item[:quantity], name: 'quantities[]' %>
+            
+          </div>
+        </div>
+      <% end %>
+
+      <div class="d-flex justify-content-between">
+        <strong>Total:</strong>
+        <strong><%= number_to_currency(@subtotal) %></strong>
+      </div>
+
+      <div id="taxes"></div>
+      <div id="grandTotal"></div>
+      <%= form.hidden_field :subtotal, name: 'order[subtotal]', value: @subtotal %>
+      <%= form.hidden_field :gst, name: 'order[gst]', id: "formGst" %>
+      <%= form.hidden_field :pst, name: 'order[pst]', id: "formPst" %>
+      <%= form.hidden_field :hst, name: 'order[hst]', id: "formHst" %>
+      <%= form.hidden_field :total, name: 'order[grand_total]', id: "formTotal" %>
+
+      <%= form.submit "Place Order", class: "btn btn-success mt-3" %>
+    <% end %>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      Your order summary is empty.
+    </div>
+  <% end %>
+
+  <%= link_to 'Back to Cart', cart_path, class: 'btn btn-info' %>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById("userProvince").addEventListener('change', updateTaxes);
+  updateTaxes(); 
+});
+
+function updateTaxes() {
+  var provinceId = document.getElementById("userProvince").value;
+  var subtotalElement = document.getElementById("subtotal");
+  var subtotal = parseFloat(subtotalElement.value); // Changed from textContent to value
+
+  fetch(`/tax_rates/${provinceId}`)
+    .then(response => response.json())
+    .then(data => {
+      var gstAmount = subtotal * (data.gst / 100);
+      var pstAmount = subtotal * (data.pst / 100);
+      var hstAmount = subtotal * (data.hst / 100);
+      var totalTaxes = gstAmount + pstAmount + hstAmount;
+      var grandTotal = subtotal + totalTaxes;
+
+      document.getElementById('taxes').innerHTML = `
+        ${data.gst > 0 ? `<p>GST: ${numberToCurrency(gstAmount)} (${data.gst}%)</p>` : ''}
+        ${data.pst > 0 ? `<p>PST: ${numberToCurrency(pstAmount)} (${data.pst}%)</p>` : ''}
+        ${data.hst > 0 ? `<p>HST: ${numberToCurrency(hstAmount)} (${data.hst}%)</p>` : ''}
+      `;
+      document.getElementById('grandTotal').innerHTML = `Total Price: ${numberToCurrency(grandTotal)}`;
+      document.getElementById('formGst').value = gstAmount;
+      document.getElementById('formPst').value = pstAmount;
+      document.getElementById('formHst').value = hstAmount;
+      document.getElementById('formTotal').value = grandTotal;
+    })
+    .catch(error => console.error('Error fetching tax rates:', error));
+}
+
+
+function numberToCurrency(number) {
+  return `$${number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+}
+</script>

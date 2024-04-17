@@ -1,0 +1,146 @@
+:root {
+    --primary-color: #0dff00;   
+    --secondary-color: #6C757D; 
+    --accent-color: #17A2B8;    
+    --light-bg: #f8f9fa;        
+    --dark-text: #343a40;      
+    --light-text: #ffffff;      
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--dark-text);
+    background-color: var(--light-bg);
+}
+
+.logo{
+    width: 100px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    color: var(--light-text);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+}
+
+.btn-info {
+    background-color: var(--accent-color);
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+h1, h2, h5 {
+    margin-bottom: 16px;
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+.input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pagination {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 5px;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    text-decoration: none;
+    background: var(--light-bg);
+    color: var(--dark-text);
+}
+
+
+.container {
+    max-width: 1200px; 
+    margin: auto; 
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #585858;
+}
+
+.product-links {
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex-basis: 48%; /* Make form elements take almost half the width */
+    margin-bottom: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 5px 0; /* Provide some vertical spacing */
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.category-section {
+    margin-top: 30px;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+/* Additional styles for buttons to improve hover interaction */
+.btn:hover {
+    opacity: 0.8;
+}

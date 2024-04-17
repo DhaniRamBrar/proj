@@ -1,0 +1,16 @@
+<%= render 'layouts/client_Nav' %>
+<div class="mt-4 mb-4 container">
+
+<h1>Products on Sale</h1>
+
+
+<% if @products_on_sale.any? %>
+  <div class="row">
+  <%= render partial: 'layouts/products', collection: @products_on_sale, as: :product %>
+  </div>
+  <%= paginate @products_on_sale %>
+<% else %>
+  <p>No products on sale at the moment.</p>
+<% end %>
+
+</div>
